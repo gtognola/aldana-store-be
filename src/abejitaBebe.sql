@@ -16,7 +16,7 @@ name VARCHAR(255) NOT NULL
 CREATE TABLE User (
 id INT PRIMARY KEY AUTO_INCREMENT,
 name VARCHAR(255) NOT NULL,
-userName VARCHAR(255) NOT NULL UNIQUE,
+username VARCHAR(255) NOT NULL UNIQUE,
 password VARCHAR(255) NOT NULL,
 phone VARCHAR(20) NOT NULL,
 email VARCHAR(255) NOT NULL UNIQUE
@@ -34,7 +34,7 @@ FOREIGN KEY (categoryId) REFERENCES Category(id)
 );
 
 -- Tabla productImage
-CREATE TABLE productImage(
+CREATE TABLE ProductImage(
 productId INT NOT NULL,
 image VARCHAR(255),
 PRIMARY KEY (productId, image),
