@@ -15,11 +15,17 @@ getProductById = (req, res) => {
 	}
 };
 
-createProduct = (req, res) => {};
+createProduct = (req, res) => {
+	res.send("Crear un producto")
+};
 
-updateProduct = (req, res) => {};
+updateProduct = (req, res) => {
+	res.send("Actualizar un producto")
+};
 
-deleteProduct = (req, res) => {};
+deleteProduct = (req, res) => {
+	res.send("Eliminar un producto")
+};
 
 module.exports = {
 	getAllProducts,
