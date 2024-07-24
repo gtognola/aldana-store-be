@@ -1,13 +1,13 @@
 const productService = require("../services/product.service");
 
-getAllProducts = (req, res) => {
-	const products = productService.getAllProducts();
+getAllProducts = async (req, res) => {
+	const products = await productService.getAllProducts();
 	res.send(products);
 };
 
-getProductById = (req, res) => {
+getProductById = async (req, res) => {
 	const id = req.params.id;
-	const product = productService.getProductById(id);
+	const product = await productService.getProductById(id);
 	if (product) {
 		res.send(product);
 	} else {

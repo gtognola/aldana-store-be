@@ -8,16 +8,14 @@
 */
 const express = require('express');
 const router = express.Router();
-const db = require('../config/conn')
+const {db} = require('../config/conn')
 
 // obtener todos los productos
-getAllProducts = (req, res) => {
+getAllProducts = async () => {
 	const sql = 'SELECT * FROM Product';
-	db.query(sql, (err, results)=>{
-		if (err) throw err;
-		res.json(results);
-	});
-};
+	const [results]  = await db.query(sql) 
+	return results;
+}
 
 // obtener el producto mediante el id
 getProductById = (req, res) => {
