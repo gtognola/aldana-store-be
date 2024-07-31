@@ -13,17 +13,15 @@ const {db} = require('../config/conn')
 // obtener todos los productos
 getAllProducts = async () => {
 	const sql = 'SELECT * FROM Product';
-	const [results]  = await db.query(sql) 
+	const [results]  = await db.query(sql); 
 	return results;
 }
 
 // obtener el producto mediante el id
-getProductById = (req, res) => {
+getProductById = async(id) => {
 	const sql = 'SELECT * FROM Product WHERE id = ?';
-	db.query(sql, [req.params.id], (err, result)=>{
-		if (err) throw err;
-		res.json(result);
-	});
+	const [result] = await db.query(sql, [id]);
+	return result;
 };
 // Creación de un nuevo producto
 createProduct = (req, res) => {
