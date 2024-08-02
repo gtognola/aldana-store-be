@@ -24,24 +24,19 @@ getProductById = async(id) => {
 	return result;
 };
 // Creación de un nuevo producto
-createProduct = (req, res) => {
+createProduct = async (createdProduct) => {
 	const sql = 'INSERT INTO Product SET ?';
-	const newProduct = {
-		name : req.body.name,
-		decription: req.body.description,
-		price: req.body.price,
-		image: req.body.imagen,
-		categoriId: req.body.categoriId
-	};
-	db.query(sql, newProduct, (err, result)=> {
-		if (err) throw err;
-		res.json({ id: result.insertId, ...newProduct});
+	return new Promise ((resolve, reject)=>{
+		db.query(sql, createdProduct, (err, result)=> {
+			if (err) throw err;
+			res.json({ id: result.insertId, ...createdProduct});
 	});
-};
+});
+}
 
 //Actualizar un producto
 updateProduct = (req, res) => {
-	const sql = 'UPDATE Product SER ? WHERE id = ?';
+	const sql = 'UPDATE Product SET ? WHERE id = ?';
 	const updateProduct = {
 		name: req.body.name,
 		description: req.body.description,

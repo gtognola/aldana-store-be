@@ -15,8 +15,26 @@ getProductById = async (req, res) => {
 	}
 };
 
-createProduct = (req, res) => {
-	res.send("Crear un producto")
+createProduct = async (req, res) => {
+	try{
+		const newProduct = {
+			name : req.body.name,
+			description: req.body.description,
+			price: req.body.price,
+			image: req.body.imagen,
+			categoryId: req.body.categoryId
+		};
+		const createdProduct = await productService.createProduct(newProduct);
+		if (createdProduct){
+			res.status(201).send(createdProduct);
+		}
+		else{
+			res.status(400).send({ error: 'No se ha podido crear el producto'})
+		};
+	}
+	catch (error){
+		res.status(500).sen({error: 'Error Interno del Servido'})
+	}
 };
 
 updateProduct = (req, res) => {
