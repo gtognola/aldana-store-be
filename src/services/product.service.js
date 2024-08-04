@@ -26,36 +26,27 @@ getProductById = async(id) => {
 // Creación de un nuevo producto
 createProduct = async (createdProduct) => {
 	const sql = 'INSERT INTO Product SET ?';
-	return new Promise ((resolve, reject)=>{
-		db.query(sql, createdProduct, (err, result)=> {
-			if (err) throw err;
-			res.json({ id: result.insertId, ...createdProduct});
-	});
-});
-}
-
-//Actualizar un producto
-updateProduct = (req, res) => {
-	const sql = 'UPDATE Product SET ? WHERE id = ?';
-	const updateProduct = {
-		name: req.body.name,
-		description: req.body.description,
-		price: req.body.price,
-		image: req.body.image,
-		categoryId: req.body.categoryId
-	};
-	db.query(sql, [updatedProduct, req.params.id], (err, result) => {
-		if (err) throw err;
-		res.json(updatedProduct);
-	  });
+	const [result] = await db.query(sql, createdProduct);
+	return({ id: result.insertId, ...createdProduct});
 };
 
-deleteProduct = (req, res) => {
+//Actualizar un producto
+updateProduct = async (id, updatedProduct) => {
+	const sql = 'UPDATE Product SET ? WHERE id = ?';
+	const [result] = await db.query(sql, [updatedProduct, id]);
+	if (result.affectedRows === 0) {
+		throw new Error('Product not found');
+	}
+	return { id, ...updatedProduct };
+};
+
+deleteProduct = async (id) => {
 	const sql = 'DELETE FROM Product WHERE id = ?';
-	db.query(sql, [req.params.id], (err, result) => {
-	  if (err) throw err;
-	  res.json({ message: 'Producto eliminado' });
-	});
+	const [result] = await db.query(sql, [id]);
+	if (result.affectedRows === 0) {
+		throw new Error('Product not found');
+	}
+	return { message: 'Product deleted successfully' };
 };
 
 module.exports = {
