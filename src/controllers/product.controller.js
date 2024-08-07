@@ -33,7 +33,7 @@ createProduct = async (req, res) => {
 		};
 	}
 	catch (error){
-		res.status(500).sen({error: 'Error Interno del Servido'})
+		res.status(500).send({error: 'Error Interno del Servidor'})
 	}
 };
 
