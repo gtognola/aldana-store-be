@@ -20,7 +20,7 @@ createProduct = async (req, res) => {
 		name: req.body.name,
 		description: req.body.description,
 		price: req.body.price,
-		image: req.body.imagen,
+		image: req.body.image,
 		categoryId: req.body.categoryId
 	};
 	try{
@@ -43,7 +43,7 @@ updateProduct = async (req, res) => {
 		name : req.body.name,
 		description: req.body.description,
 		price: req.body.price,
-		image: req.body.imagen,
+		image: req.body.image,
 		categoryId: req.body.categoryId
 	};
 	try {
@@ -53,7 +53,7 @@ updateProduct = async (req, res) => {
 		if (error.message === 'Product not found') {
 			res.status(404).send({ error: 'Product not found' });
 		} else {
-			res.status(500).send({ error: 'Internal Server Error' });
+			res.status(500).send(error);
 		}
 	}
 };
