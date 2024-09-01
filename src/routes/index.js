@@ -8,6 +8,7 @@ router.use(cors());
 
 const productRoutes = require("./product.route");
 const categoryRoutes = require("./category.route");
+const orderRoutes = require("./order.route");
 
 router.get("/", (req, res) => {
 	res.send("Bienvenido a la API de productos");
@@ -16,5 +17,6 @@ router.get("/", (req, res) => {
 //Lista de rutas
 router.use("/product", productRoutes);
 router.use("/category", categoryRoutes);
+router.use("/order", orderRoutes);
 
 module.exports = router;

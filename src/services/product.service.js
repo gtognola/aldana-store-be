@@ -6,8 +6,6 @@
 	{ id: 5, name: "Product 5", price: 500 },
 ];
 */
-const express = require("express");
-const router = express.Router();
 const { db } = require("../config/conn");
 
 // obtener todos los productos
