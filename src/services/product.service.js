@@ -12,14 +12,16 @@ const { db } = require("../config/conn");
 
 // obtener todos los productos
 getAllProducts = async () => {
-	const sql = "SELECT * FROM Product";
+	const sql =
+		"SELECT p.*, c.name categoryName FROM Product p JOIN Category c ON p.categoryId = c.id";
 	const [results] = await db.query(sql);
 	return results;
 };
 
 // obtener el producto mediante el id
 getProductById = async (id) => {
-	const sql = "SELECT * FROM Product WHERE id = ?";
+	const sql =
+		"SELECT p.*, c.name categoryName FROM Product p JOIN Category c ON p.categoryId = c.id WHERE p.id = ?";
 	const [result] = await db.query(sql, [id]);
 	return result[0];
 };
