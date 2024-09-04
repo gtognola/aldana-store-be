@@ -4,7 +4,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 router.use(bodyParser.json());
-router.use(cors());
+router.use(cors({origin: 'http://localhost:3000'  // Cambia esto al dominio de tu aplicación frontend
+}));
 
 const productRoutes = require("./product.route");
 const categoryRoutes = require("./category.route");
