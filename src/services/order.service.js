@@ -18,7 +18,7 @@ const addProductToOrder = async (newOrderProduct) => {
     const [result] = await db.query(sql, newOrderProduct);
 
     return { id: result.insertId, ...newOrderProduct };
-  } catch {
+  } catch (error) {
     console.log("Error al obtener las ordenes", error);
     throw error;
   }
@@ -45,10 +45,29 @@ const getAllOrders = async () => {
     }
 };
 
+const deleteProductFromOrder = async (orderId, productId) => {
+  try {
+    // Eliminar el producto de la tabla OrderProduct
+    const result = await db.query(
+      'DELETE FROM OrderProduct WHERE orderId = ? AND productId = ?',
+      [orderId, productId]
+    );
+    if (result.affectedRows === 0) {
+      throw new Error('No se encontró el producto en la orden');
+    }
+
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 
 module.exports = {
   createOrder,
   addProductToOrder,
   getOrderById,
   getAllOrders,
+  deleteProductFromOrder,
+
 };
