@@ -11,6 +11,7 @@ router.use(cors());
 const productRoutes = require("./product.route");
 const categoryRoutes = require("./category.route");
 const orderRoutes = require("./order.route");
+const authRoutes = require("./auth.route")
 
 router.get("/", (req, res) => {
 	res.send("Bienvenido a la API de productos");
@@ -20,6 +21,7 @@ router.get("/", (req, res) => {
 router.use("/product", productRoutes);
 router.use("/category", categoryRoutes);
 router.use("/order", orderRoutes);
+router.use("/auth/register", authRoutes)
 
 // Rutas protegidas por autenticación
 router.post('/order', authenticateJWT, orderController.createOrder);
