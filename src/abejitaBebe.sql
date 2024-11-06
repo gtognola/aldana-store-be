@@ -21,6 +21,8 @@ password VARCHAR(255) NOT NULL,
 phone VARCHAR(20) NOT NULL,
 email VARCHAR(255) NOT NULL UNIQUE
 );
+ALTER TABLE User
+ADD COLUMN role ENUM('user', 'admin') DEFAULT 'user';
 
 -- Tabla product
 CREATE TABLE Product(
